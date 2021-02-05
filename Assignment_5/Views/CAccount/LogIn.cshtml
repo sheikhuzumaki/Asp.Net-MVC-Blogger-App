@@ -1,0 +1,123 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Log In Page</title>
+
+    <script type="text/javascript" language="javascript">
+        function validate() {
+            const errorElements = document.form2.getElementsByClassName('error');
+		for(var i = 0; i < errorElements.length; i++) {
+			errorElements[i].innerHTML = '';
+		}
+	if(document.form2.uname.value == ""){
+		document.form2.getElementsByClassName('error')[0].innerHTML = 'Enter User Name' ;
+		return false ;
+	}
+	
+	if(document.form2.pass.value == ""){
+		document.form2.getElementsByClassName('error')[1].innerHTML = 'Enter Password' ;
+		return false ;
+	}
+	
+
+        }
+
+        function validateadmin() {
+            const errorElements = document.form1.getElementsByClassName('error');
+            for (var i = 0; i < errorElements.length; i++) {
+                errorElements[i].innerHTML = '';
+            }
+            if (document.form1.auname.value == "") {
+                document.form1.getElementsByClassName('error')[0].innerHTML = 'Enter User Name';
+                return false;
+            }
+
+            if (document.form1.apass.value == "") {
+                document.form1.getElementsByClassName('error')[1].innerHTML = 'Enter Password';
+                return false;
+            }
+
+
+        }
+
+</script>
+</head>
+<body>
+    <nav class="navbar navbar-default bg-dark text-white">
+        <div class="container-fluid">
+            <h1>Sign In</h1>
+            <a class="btn btn-success float-right" href="/CAccount/Register">Create An Account</a>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2>Admin</h2>
+                <form name="form1" onsubmit="return validateadmin()" method="post" action="/CAccount/LogInForm_Admin">
+                    <div class="form-group">
+                        <label class="col-form-label-lg">User Name</label>
+                        <input type="text" name="auname" class="form-control">
+                        <span style="color: red" class="error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label-lg">Password</label>
+                        <input type="password" name="apass" class="form-control">
+                        <span style="color: red" class="error"></span>
+                    </div>
+
+                    <br>
+                    <div>
+                        <input type="submit" name="submit" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+            <div class="col">
+                <h2>User</h2>
+                <form name="form2" onsubmit="return validate()" method="post" action="/CAccount/LogInForm">
+                    <div class="form-group">
+                        <label class="col-form-label-lg">User Name</label>
+                        <input type="text" name="uname" class="form-control">
+                        <span style="color: red" class="error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label-lg">Password</label>
+                        <input type="password" name="pass" class="form-control">
+                        <span style="color: red" class="error"></span>
+                    </div>
+
+                    <br>
+                    <div>
+                        <input type="submit" name="submit" class="btn btn-success">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.Message != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+    @if (ViewBag.Message1 != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("@ViewBag.Message1");
+            };
+        </script>
+    }
+    
+</body>
+</html>

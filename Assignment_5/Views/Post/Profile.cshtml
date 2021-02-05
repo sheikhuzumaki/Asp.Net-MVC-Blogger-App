@@ -1,0 +1,106 @@
+﻿@using Assignment_5.Models;
+<!doctype html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>User DashBoard</title>
+    <script type="text/javascript" language="javascript">
+	function validate() {
+		const errorElements = document.getElementsByClassName('error');
+		for(var i = 0; i < errorElements.length; i++) {
+			errorElements[i].innerHTML = '';
+		}
+	if(document.form.uname.value == ""){
+		document.getElementsByClassName('error')[0].innerHTML = 'Enter User Name' ;
+		return false ;
+	}
+	if(document.form.email.value == ""){
+		document.getElementsByClassName('error')[1].innerHTML = 'Enter Email' ;
+		return false ;
+	}
+	if(document.form.cpass.value == ""){
+		document.getElementsByClassName('error')[2].innerHTML = 'Enter Old Password' ;
+		return false ;
+	}
+	if(document.form.npass.value == ""){
+		document.getElementsByClassName('error')[3].innerHTML = 'Enter New Password' ;
+		return false ;
+	}
+	
+
+    }
+
+    </script>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link " href="/UserDashBoard/Index">Home</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link " href="/Post/About/@Model">About</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link active" href="/Post/Profile/@Model">Profile</a>
+                </li>
+                <li class="nav-item ">
+                    <a class="nav-link" href="/CAccount/LogIn">Log Out</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br />
+    <div class="container">
+        <h3>@ViewBag.name</h3>
+        <img class="rounded-circle" src="~/Content/Images/@ViewBag.pic" width="200" ; height="200" />
+        <div class="container">
+            <form name="form" onsubmit="return validate()" action="/Post/ProfileForm">
+                <div class="form-group">
+                    <label class="col-form-label-lg">User Name</label>
+                    <input type="text" name="uname" class="form-control">
+                    <span style="color: red" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label-lg">Email</label>
+                    <input type="email" name="email" class="form-control">
+                    <span style="color: red" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label-lg">Old Password</label>
+                    <input type="password" name="cpass" class="form-control">
+                    <span style="color: red" class="error"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-form-label-lg">New Password</label>
+                    <input type="password" name="npass" class="form-control">
+                    <span style="color: red" class="error"></span>
+                </div>
+                <br />
+                <div class="form-group">
+                    <input type="hidden" name="id" value="@Model" />
+                    <input type="submit" class="btn btn-primary" value="Update" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    @if (ViewBag.Message != null)
+    {
+        <script>
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+</body>
+</html>
